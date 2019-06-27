@@ -1,36 +1,33 @@
 #include <iostream>
-#include <cstdlib>
 #include <string>
-
 using namespace std;
-
-string bukovki(string s, int w[6])
-{
-	for (int i = 0; i < 6; i++)
-		w[i] = 0;
-	for (int p = 0; p < s.length(); p++)
-	{
-		if (s[p] == 'a')
-			w[0]++;
-		if (s[p] == 'e')
-			w[1]++;
-		if (s[p] == 'y')
-			w[2]++;
-		if (s[p] == 'u')
-			w[3]++;
-		if (s[p] == 'i')
-			w[4]++;
-		if (s[p] == 'o')
-			w[5]++;
+void func(string str, int &a, int &u, int &e, int &o, int &y, int &ai) {
+	for (int i=0; i<str.length(); i++) {
+		if (str[i]=='a') {
+			a++;
+		} else if (str[i]=='u') {
+			u++;
+		}
+		if (str[i]=='e') {
+			e++;
+		} else if (str[i]=='o') {
+			o++;
+		}
+		if (str[i]=='y') {
+			y++;
+		} else if(str[i]=='i') {
+			ai++;
+		}
 	}
-	return s;
 }
 
-int main()
-{
-	string s;
-	int mas[6];
-	getline(cin,s);
-    bukovki(s,mas);
-    cout << "a = " << mas[0] << " " << "e = " << mas[1] << " " << "y = " << mas[2] << " " << "u = " << mas[3] << " " << "i = " << mas[4] << " " << "o = " << mas[5] << endl;
+int main() {
+	string in_str;
+	cin>>in_str;
+	int a=0, u=0, e=0, o=0, y=0, ai=0;
+	func(in_str, a, u, e, o, y, ai);
+	cout<<"a- "<<a<<" u- "<<u<<" e- "<<e<<" o- "<<o<<" y- "<<y<<" i- "<<ai<<endl;
+	cout<<"All- "<<a+u+e+o+y+ai<<endl;
 	return 0;
+}
+	
