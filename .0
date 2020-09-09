@@ -1,0 +1,44 @@
+класс CaesarsCipher:
+    def _ _ init__(self, file_path, shift):
+        самость.file_path = file_path
+        самость.shift = сдвиг
+        самость.содержание = самость.encrypted_text = self.decrypted_text = нет
+
+    def read_file(self):
+        с открытым(self.file_path, 'r', encoding='utf8') как f:
+            самость.content = ".join([строка для строки в f])
+
+    def _ _ helper(self, action='encrypt'):
+        текст = список(self.содержание)
+        если действие = = 'расшифровать':
+            текст = список(self.encrypted_text)
+            самость.shift = -self.сдвиг
+        алфавит = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        алфавит += алфавит.ниже()
+        half_length = len(алфавит) / / 2
+        для i в диапазоне(len(text)):
+            если текст[i] в алфавите:
+                index_in_alphabet = алфавит.индекс(текст[i])
+                new_letter_index = (index_in_alphabet + self.shift) % half_length
+                if index_in_alphabet > half_length - 1:
+                    new_letter_index += half_length
+                text[i] = алфавит[new_letter_index]
+        возвращение ".присоединиться(текст)
+
+    def encrypt_text(self):
+        самость.encrypted_text = self._ _ помощник()
+
+    def decrypt_text(self):
+        самость.decrypted_text = self._ _ helper('расшифровать')
+        печать(self.decrypted_text = = self.content) # для проверки
+
+    def write_file(self):
+        с открытым('./зашифрованный.txt', 'w', encoding='utf8') как f:
+            f.напишите(self.encrypted_text)
+
+
+caesars_cipher = CaesarsCipher('./первоначальный.txt', int(input('Shift: ')))
+Цезарь-шифр .read_file()
+Цезарь-шифр .encrypt_text()
+Цезарь-шифр .decrypt_text()
+Цезарь-шифр .write_file()
