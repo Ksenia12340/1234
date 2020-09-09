@@ -1,0 +1,74 @@
+импорт случайный
+
+
+класс PolybiusSquare:
+    алфавит = 'ABCDEFGHIKLMNOPQRSTUVWXYZ'
+
+    def _ _ init__(self, file_path):
+        самость.file_path = file_path
+        самость.ключ = самость._ _ сгенерировать _ ключ()
+        самость.содержание = самость.encrypted_text = self.decrypted_text = нет
+
+    def read_file(self):
+        алфавит = PolybiusSquare.алфавит
+        с открытым(self.file_path, 'r', encoding='utf8') как f:
+            самость.content = ".join([строка для строки в f]).верхний()
+        самость.content = list(self.содержание)
+        ибо я в диапазоне(len(self.содержание)):
+            если сам.content[i] = = 'J':
+                самость.content[i] = 'I'
+        самость.content = list(filter(lambda s: s in alphabet + '', ".присоединяйтесь(self.содержание)))
+        самость.content = ".присоединяйтесь(self.содержание)
+
+    def _ _generate_key (self):
+        алфавит = PolybiusSquare.алфавит
+        alphabet_indexes = list(range(LEN(alphabet)))
+        случайность.shuffle(alphabet_indexes)
+        ключ = ".join([alphabet[i] for i in alphabet_indexes])
+        key = [list(key[i:i+5]) для i в диапазоне(0, len(key), 5)]
+        с открытым('./ключ.txt', 'w', encoding='utf8') как f:
+            для i в диапазоне(LEN(key)):
+                для j в диапазоне(len(key[i])):
+                    f.напишите(f '{ключ[i][j]} - {i}, {j}\n')
+         ключ возврата
+
+    def _ _ get_word _ координаты(self, word):
+        координаты = []
+        для i в списке(word):
+            для строки в диапазоне(len(self.ключ)):
+                если я в себе.ключ[строка]:
+                    колонка = самость.клавиша[строка].индекс(i)
+                    координаты.добавить([строка, столбец])
+        верните координаты
+
+    def _ _ encrypt_word(self, word):
+        координаты = self._ _ get_word _ координаты( word)
+        координаты = [*[i[0] для i в координатах], *[i[1] для i в координатах]]
+        координаты = [[координаты[i], координаты[i+1]] для i в диапазоне(0, len(координаты), 2)]
+        возвращение ".присоединяйтесь([self.ключ[i][j] для i, j в координатах])
+
+    def _ _ decrypt_word(self, word):
+        координаты = самость._ _ get_word _ координаты(word)
+        координаты = ''.join([''.join([str(j) for j in i]) for i in координаты])
+        координаты = список(карта(int, координаты.сплит()))
+        half_length = len(координаты) / / 2
+        координаты = список(zip(координаты[:half_length], координаты[half_length:]))
+        возвращение ".присоединяйтесь([self.ключ[i][j] для i, j в координатах])
+
+    def encrypt_text(self):
+        самость.encrypted_text = ''.присоединяйтесь([self._ _ зашифруйте _ слово(i) для i в себе.содержание.сплит()])
+
+    def decrypt_text(self):
+        самость.decrypted_text = ''.присоединяйтесь([self._ _ расшифруйте _ слово(i) для i в себе.зашифрованныйтекст .сплит()])
+        печать(self.decrypted_text = = self.content) # для проверки
+
+    def write_file(self):
+        с открытым('./зашифрованный.txt', 'w', encoding='utf8') как f:
+            f.напишите(self.зашифрованный текст)
+
+
+polybius_square = PolybiusSquare('./первоначальный.txt')
+polybius_square.read_file()
+polybius_square.encrypt_text()
+polybius_square.decrypt_text()
+polybius_square.write_file()
